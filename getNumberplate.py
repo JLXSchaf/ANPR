@@ -2,6 +2,7 @@ cpt = 0
 
 
 import os
+import sys
 import cv2 
 import easyocr
 import numpy as np
@@ -14,7 +15,6 @@ from object_detection.utils import label_map_util
 from object_detection.builders import model_builder
 from object_detection.utils import visualization_utils as viz_utils
 #%matplotlib inline
-
 
 CUSTOM_MODEL_NAME = 'my_ssd_mobnet' 
 PRETRAINED_MODEL_NAME = 'ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8'
@@ -82,10 +82,8 @@ category_index = label_map_util.create_category_index_from_labelmap(files['LABEL
 
 
 
-# damit man image direkt dazu geben kann, müsste man das hier in die Variable irgendwie reinsetzen
-IMAGE_PATH = os.path.join(paths['IMAGE_PATH'], 'test', 'testlkwnl2.jpeg')
-
-
+imageName = str(sys.argv).replace("[","").replace("]","").replace("'","").strip().split(",")[1]
+IMAGE_PATH = os.path.join(paths['IMAGE_PATH'], 'test', f'{imageName}')
 
 
 
@@ -118,7 +116,9 @@ viz_utils.visualize_boxes_and_labels_on_image_array(
             agnostic_mode=False)
 
 plt.imshow(cv2.cvtColor(image_np_with_detections, cv2.COLOR_BGR2RGB))
-plt.show()
+#plt.show()
+# Das gibt normalerweise das fertige Bild aus, funktioniert nur nciht wenn man als cmd text zurückkriegt, sollte man das BIld trotzdem wollen, müsste man das
+# wahrscheinlich wieder umwandeln in ein Numpyarray
    
     # Apply OCR to Detection
 
@@ -157,5 +157,5 @@ def filter_text(region, ocr_result, region_threshold):
         return plate
 print(filter_text(region, ocr_result, region_threshold))
 
-# first output can be multiple different lines of text which were found
-# second output is the biggest Text found
+# first output can be multiple different lines of text which were found, bsp: WES-DK.92, DE <- jeglicher Text auf dem Nummernschild
+# second output is the biggest Text found <- mit großer wahrscheinlichkeit dann der richtige Text vom NUmmernschild, da es aus den grö0ten Schriftzeichen besteht
