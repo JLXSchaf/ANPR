@@ -5,7 +5,7 @@
 >- Gebe nun folgendes in die Konsole ein: py -3.8  getNumberplate.py Bildname.Bildformat
 
 >- Das Programm wird die 2 Antworten geben.
->- Antwort 1: jeglicher Text der auf dem Nummernschild vorhanden ist zB.: XXX-XX-1234, DE
+>>- Antwort 1: jeglicher Text der auf dem Nummernschild vorhanden ist zB.: XXX-XX-1234, DE
 >>- Antwort 2: der Text, der mit der höchsten Wahrscheinlichkeit das Kennzeichen ist. Dafür nimmer er die Proportion von der Textgröße zur Gesamtgröße des Nummernschildes und gibt dir den größten Text aus. 
 
 
